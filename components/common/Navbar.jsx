@@ -2,9 +2,9 @@ import { Box, Button, Link, useColorMode } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
-import { auth } from "../firebase";
-import useAuth from "../hooks/useAuth";
-import AddTodo from "./AddTodo";
+import { auth } from "../../firebase";
+import useAuth from "../../hooks/useAuth";
+import AddTodo from "../Todo/AddTodo";
 
 const Navbar = () => {
   const { isLoggedIn, user } = useAuth();

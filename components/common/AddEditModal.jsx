@@ -27,7 +27,7 @@ const AddEditModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent top="7rem">
         <ModalHeader>{header}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>

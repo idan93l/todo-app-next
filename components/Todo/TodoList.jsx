@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import { deleteTodo, toggleTodoStatus, updateTodoContent } from "../api/todo";
-import { db } from "../firebase";
+import useAuth from "../../hooks/useAuth";
+import { deleteTodo, toggleTodoStatus, updateTodoContent } from "../../api/todo";
+import { db } from "../../firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { Box, Flex, useToast } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";

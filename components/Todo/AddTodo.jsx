@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { addTodo } from "../api/todo";
-import AddEditModal from "./AddEditModal";
-import useAuth from "../hooks/useAuth";
+import { addTodo } from "../../api/todo";
+import AddEditModal from "../common/AddEditModal";
+import useAuth from "../../hooks/useAuth";
 import { Button, useToast, useDisclosure } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 

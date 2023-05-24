@@ -13,7 +13,8 @@ import {
   useDisclosure,
   useColorMode,
 } from "@chakra-ui/react";
-import AddEditModal from "./AddEditModal";
+import AddEditModal from "../common/AddEditModal";
+import DeleteItem from "./DeleteItem";
 
 const TodoItem = ({
   id,
@@ -37,21 +38,7 @@ const TodoItem = ({
       _hover={{ boxShadow: "base" }}
     >
       <Heading>
-        <Badge
-          color="red.500"
-          bg="inherit"
-          transition={"0.2s"}
-          _hover={{
-            bg: "inherit",
-            transform: "scale(1.2)",
-          }}
-          float="right"
-          size="xs"
-          cursor="pointer"
-          onClick={() => handleTodoDelete(id)}
-        >
-          <FaTrashAlt size={20} />
-        </Badge>
+        <DeleteItem id={id} handleTodoDelete={handleTodoDelete} />
         <Badge
           color="blue.500"
           bg="inherit"

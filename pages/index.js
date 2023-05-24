@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import TodoList from "../components/TodoList";
+import Navbar from "../components/common/Navbar";
+import TodoList from "../components/Todo/TodoList";
 import { Container } from "@chakra-ui/react";
 
 export default function Home() {
