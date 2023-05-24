@@ -4,8 +4,9 @@ import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { auth } from "../firebase";
 import useAuth from "../hooks/useAuth";
+import AddTodo from "./AddTodo";
 
-const Auth = () => {
+const Navbar = () => {
   const { isLoggedIn, user } = useAuth();
   const { toggleColorMode, colorMode } = useColorMode();
 
@@ -34,7 +35,7 @@ const Auth = () => {
   return (
     <Box
       width="100vw"
-      height="30px"
+      height={70}
       position={"fixed"}
       top={0}
       display="flex"
@@ -44,21 +45,23 @@ const Auth = () => {
       backgroundColor={colorMode === "dark" ? "blue.900" : "blue.200"}
       zIndex={1}
     >
-      <Button onClick={() => toggleColorMode()}>
-        {colorMode === "dark" ? <FaSun /> : <FaMoon />}
-      </Button>{" "}
+      <Button
+        height="52px"
+        width="52px"
+        color="yellow.400"
+        borderRadius="10px"
+        onClick={() => toggleColorMode()}
+      >
+        {colorMode === "dark" ? <FaSun size={20} /> : <FaMoon size={20} />}
+      </Button>
       {isLoggedIn && (
         <>
-          <Text
-            color={colorMode === "dark" ? "white" : "gray.700"}
-            fontSize={25}
-            fontWeight={900}
-          >
-            {user.email.split("@")[0].toUpperCase()}
-          </Text>
-          <Link color="red.500" onClick={() => auth.signOut()}>
-            <TbLogout size={30} />
-          </Link>
+          <AddTodo />
+          <Button height="52px" width="52px" borderRadius="10px" >
+            <Link color="red.500" onClick={() => auth.signOut()}>
+              <TbLogout size={30} />
+            </Link>
+          </Button>
         </>
       )}
       {!isLoggedIn && (
@@ -70,4 +73,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Navbar;

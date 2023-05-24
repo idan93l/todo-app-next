@@ -1,6 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import AddTodo from "../components/AddTodo";
-import Auth from "../components/Auth";
+import Navbar from "../components/Navbar";
 import TodoList from "../components/TodoList";
 export default function Home() {
   return (
@@ -11,8 +11,7 @@ export default function Home() {
       flexDirection="column"
       maxW="7xl"
     >
-      <Auth />
-      <AddTodo />
+      <Navbar />
       <TodoList />
     </Container>
   );

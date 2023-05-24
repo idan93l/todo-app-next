@@ -2,21 +2,29 @@ import { useState } from "react";
 import { addTodo } from "../api/todo";
 import useAuth from "../hooks/useAuth";
 import {
-  Box,
   Button,
   Textarea,
-  Stack,
   useToast,
+  useDisclosure,
   useColorMode,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
+import { FaPlus } from "react-icons/fa";
 
 const AddTodo = () => {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { colorMode } = useColorMode();
 
+  const { colorMode } = useColorMode();
   const toast = useToast();
   const { isLoggedIn, user } = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleTodoCreate = async () => {
     if (!isLoggedIn) {
@@ -43,22 +51,39 @@ const AddTodo = () => {
   };
 
   return (
-    <Box w="70%" margin={"0 auto"} display="block" mt={110}>
-      <Stack direction="column">
-        <Textarea
-          placeholder="Write something to do..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <Button
-          onClick={() => handleTodoCreate()}
-          isDisabled={content.length < 1 || isLoading}
-          backgroundColor={colorMode === "dark" ? "blue.900" : "blue.200"}
-        >
-          Add
-        </Button>
-      </Stack>
-    </Box>
+    <>
+      <Button height="52px" width="52px" borderRadius="10px" onClick={onOpen}>
+        <FaPlus size={20} />
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add new task</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Textarea
+              placeholder="Write something to do..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              mr={3}
+              backgroundColor={colorMode === "dark" ? "blue.900" : "blue.200"}
+              isDisabled={content.length < 1 || isLoading}
+              onClick={() => {
+                handleTodoCreate();
+              }}
+            >
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 export default AddTodo;
