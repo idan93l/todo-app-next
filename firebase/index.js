@@ -8,9 +8,8 @@ const firebaseConfig = {
   projectId: "todo-app-next-387a9",
   storageBucket: "todo-app-next-387a9.appspot.com",
   messagingSenderId: "125178577875",
-  appId: "1:125178577875:web:41131af959d18df686e526"
+  appId: "1:125178577875:web:41131af959d18df686e526",
 };
-
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
