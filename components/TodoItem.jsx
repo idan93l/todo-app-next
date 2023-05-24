@@ -10,17 +10,10 @@ import {
   Box,
   Heading,
   Text,
-  Button,
-  Textarea,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton
+  useColorMode,
 } from "@chakra-ui/react";
+import AddEditModal from "./AddEditModal";
 
 const TodoItem = ({
   id,
@@ -30,17 +23,18 @@ const TodoItem = ({
   handleTodoEdit,
 }) => {
   const [content, setContent] = useState(todo.content);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode } = useColorMode();
 
   return (
     <Box
       p={3}
-      boxShadow="1xl"
-      shadow={"dark-lg"}
-      transition="0.2s"
-      _hover={{ boxShadow: "sm" }}
-      borderRadius="8px"
       width="90vw"
+      boxShadow={colorMode === "light" ? "lg" : "dark-lg"}
+      transition="0.2s"
+      borderRadius="8px"
+      _hover={{ boxShadow: "base" }}
     >
       <Heading>
         <Badge
@@ -67,7 +61,6 @@ const TodoItem = ({
             transform: "scale(1.2)",
           }}
           float="right"
-          size="xs"
           cursor="pointer"
           onClick={onOpen}
         >
@@ -82,7 +75,6 @@ const TodoItem = ({
             transform: "scale(1.2)",
           }}
           float="right"
-          size="xs"
           cursor="pointer"
           onClick={() => handleTodoToggle(todo.id, todo.status)}
         >
@@ -98,26 +90,16 @@ const TodoItem = ({
       >
         {todo.content}
       </Text>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Update task</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <Textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => {handleTodoEdit(todo.id, content)}}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <AddEditModal
+        isOpen={isOpen}
+        onClose={onClose}
+        header="Update task"
+        button="Save"
+        id={todo.id}
+        content={content}
+        setContent={setContent}
+        handleFunction={handleTodoEdit}
+      />
     </Box>
   );
 };

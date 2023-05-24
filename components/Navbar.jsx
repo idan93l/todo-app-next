@@ -1,4 +1,4 @@
-import { Box, Button, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Button, Link, useColorMode } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
@@ -50,6 +50,7 @@ const Navbar = () => {
         width="52px"
         color="yellow.400"
         borderRadius="10px"
+        boxShadow="inner"
         onClick={() => toggleColorMode()}
       >
         {colorMode === "dark" ? <FaSun size={20} /> : <FaMoon size={20} />}
@@ -57,7 +58,7 @@ const Navbar = () => {
       {isLoggedIn && (
         <>
           <AddTodo />
-          <Button height="52px" width="52px" borderRadius="10px" >
+          <Button height="52px" width="52px" borderRadius="10px" boxShadow="inner">
             <Link color="red.500" onClick={() => auth.signOut()}>
               <TbLogout size={30} />
             </Link>

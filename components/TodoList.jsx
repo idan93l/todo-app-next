@@ -2,17 +2,8 @@ import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { deleteTodo, toggleTodoStatus, updateTodoContent } from "../api/todo";
 import { db } from "../firebase";
-import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
-import {
-  Box,
-  Flex,
-  useToast,
-} from "@chakra-ui/react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { Box, Flex, useToast } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
@@ -40,13 +31,13 @@ const TodoList = () => {
 
   useEffect(() => {
     refreshData();
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleTodoDelete = async (id) => {
-    if (confirm("Are you sure you wanna delete this todo?")) {
+    // if (confirm("Are you sure you wanna delete this todo?")) {
       deleteTodo(id);
       toast({ title: "Todo deleted successfully", status: "success" });
-    }
+    // }
   };
 
   const handleTodoToggle = async (id, status) => {
@@ -67,10 +58,19 @@ const TodoList = () => {
   };
 
   return (
-    <Box mt="100px">
+    <Box m="100px 0 30px 0">
       <Flex flexDirection="column" justifyContent="space-evenly" gap={4}>
         {todos &&
-          todos.map((todo) => (<TodoItem key={todo.id} id={todo.id} todo={todo} handleTodoDelete={handleTodoDelete} handleTodoToggle={handleTodoToggle} handleTodoEdit={handleTodoEdit} />))}
+          todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id}
+              todo={todo}
+              handleTodoDelete={handleTodoDelete}
+              handleTodoToggle={handleTodoToggle}
+              handleTodoEdit={handleTodoEdit}
+            />
+          ))}
       </Flex>
     </Box>
   );
