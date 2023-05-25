@@ -34,7 +34,7 @@ function DeleteItem({ id, handleTodoDelete }) {
       </Badge>
       <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent top="7rem">
+      <ModalContent top="7rem" back>
         <ModalHeader>Are you Sure?</ModalHeader>
         <ModalCloseButton />
         <ModalFooter>

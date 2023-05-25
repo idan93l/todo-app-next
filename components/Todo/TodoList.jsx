@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { deleteTodo, toggleTodoStatus, updateTodoContent } from "../../api/todo";
 import { db } from "../../firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { Box, Flex, useToast } from "@chakra-ui/react";
+import { Box, Flex, useToast, Text } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
@@ -59,6 +59,7 @@ const TodoList = () => {
 
   return (
     <Box m="100px 0 30px 0">
+      {!todos.length && (<Text mt="10rem" fontSize="3xl">If you want to start adding tasks, please login . . .</Text>)}
       <Flex flexDirection="column" justifyContent="space-evenly" gap={4}>
         {todos &&
           todos.map((todo) => (

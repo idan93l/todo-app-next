@@ -1,33 +1,36 @@
-import { Box, Button, Link, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Link,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { auth } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
 import AddTodo from "../Todo/AddTodo";
+import LoginModal from "./LoginModal";
 
 const Navbar = () => {
   const { isLoggedIn, user } = useAuth();
   const { toggleColorMode, colorMode } = useColorMode();
+  const { onClose } = useDisclosure();
 
   const handleAuth = async () => {
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
   };
@@ -58,7 +61,12 @@ const Navbar = () => {
       {isLoggedIn && (
         <>
           <AddTodo />
-          <Button height="52px" width="52px" borderRadius="10px" boxShadow="inner">
+          <Button
+            height="52px"
+            width="52px"
+            borderRadius="10px"
+            boxShadow="inner"
+          >
             <Link color="red.500" onClick={() => auth.signOut()}>
               <TbLogout size={30} />
             </Link>
@@ -66,9 +74,12 @@ const Navbar = () => {
         </>
       )}
       {!isLoggedIn && (
-        <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
-          Login with Google
-        </Button>
+        <>
+          <LoginModal onClose={onClose} handleAuth={handleAuth} icon={<FaGoogle />}/>
+          <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+            Login with Google
+          </Button>
+        </>
       )}
     </Box>
   );
