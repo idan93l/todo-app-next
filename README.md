@@ -34,16 +34,22 @@ Install dependencies
   npm install
 ```
 
-Start the client
+Run locally
 
 ```bash
   npm run dev
 ```
 
-Start the server
+Production
 
 ```bash
   npm run start
+```
+
+Build
+
+```bash
+  npm run build
 ```
 
 
