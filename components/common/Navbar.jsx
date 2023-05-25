@@ -75,7 +75,11 @@ const Navbar = () => {
       )}
       {!isLoggedIn && (
         <>
-          <LoginModal onClose={onClose} handleAuth={handleAuth} icon={<FaGoogle />}/>
+          <LoginModal
+            onClose={onClose}
+            handleAuth={handleAuth}
+            icon={<FaGoogle />}
+          />
           <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
             Login with Google
           </Button>

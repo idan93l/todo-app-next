@@ -1,6 +1,5 @@
 import {
   Button,
-  Badge,
   Modal,
   ModalOverlay,
   ModalContent,

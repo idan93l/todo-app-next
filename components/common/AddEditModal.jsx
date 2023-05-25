@@ -21,9 +21,8 @@ const AddEditModal = ({
   handleFunction,
   close,
   isLoading,
-  placeholder
+  placeholder,
 }) => {
-  
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
