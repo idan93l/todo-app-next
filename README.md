@@ -52,7 +52,6 @@ Build
   npm run build
 ```
 
-
 ## Tech Stack
 
 React, Next.js, Firebase, Chakra UI, Framer-motion.
