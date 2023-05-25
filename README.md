@@ -1,5 +1,5 @@
 
-# AI - T Shirt
+# Todo - list - app
 
 Responsive and minimalistic todo app.
 
